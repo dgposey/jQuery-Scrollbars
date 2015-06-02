@@ -1,0 +1,76 @@
+.content {
+	width: 500px;
+	height: 600px;
+	border: 1px solid #0000FF;
+	float: left;
+}
+	.content .sb-inner {
+		position: absolute;
+		/*border: 1px dashed #00FF00;*/
+		
+	}
+		#img1, #img2 {
+			padding: 1px;
+			border: 1px solid #000000;
+			margin: 5px;
+			height: 200px;
+		}
+		#img1 {
+			float: left;
+		}
+		#img2 {
+			float: right;
+		}
+		.bananas.current {
+			background-color: #FF0000;
+		}
+		.bananas {
+			color: navy;
+		}
+		.current {
+			border: 2px solid #000000;
+		}
+		
+#anotherdiv {
+	width: 700px;
+	height: 300px;
+	float: left;
+	padding: 20px;
+}
+	#anotherdiv .sb-inner {
+		position: absolute;
+		/*border: 1px dashed #00FF00;*/
+		/*margin: 20px;
+		border: 2px solid #000000;
+		padding: 10px;*/
+		border: 2px solid #000000;
+	}
+	#anotherdiv .sb-scrollbar {
+		width: 8px;
+	}
+		#anotherdiv .sb-up, #anotherdiv .sb-down {
+			height: 0px;
+		}
+		#anotherdiv .sb-toptrack, #anotherdiv .sb-bottomtrack {
+			border-radius: 0px;
+			background-color: #000000;
+		}
+		#anotherdiv .sb-toptrack {
+			border-top-right-radius: 15px;
+			border-top-left-radius: 15px;
+		}
+		#anotherdiv .sb-bottomtrack {
+			border-bottom-right-radius: 15px;
+			border-bottom-left-radius: 15px;
+		}
+		#anotherdiv .sb-thumb {
+			background-color: #FFFF00;
+			border-radius: 15px;
+		}
+		#anotherdiv .sb-thumb.clicked {
+			background-color: #FFFF99;
+		}
+.clear {
+	clear: both !important;
+	float: none !important;
+}

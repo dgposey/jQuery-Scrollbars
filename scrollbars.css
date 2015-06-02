@@ -1,0 +1,52 @@
+.sb-inner {
+	position: absolute;
+	border: 1px dashed #000000;
+}
+.sb-scrollbar {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 100%;
+	width: 20px;
+	background-color: #FFFFFF;
+	cursor: default;
+}
+	.sb-up, .sb-down {
+		position: absolute;
+		right: 0px;
+		z-index: 999;
+		width: 100%;
+		height: 24px;
+	}
+	.sb-up {
+		top: 0px;
+		background-image: url("example/images/uparrow.jpg");
+	}
+	.sb-down {
+		bottom: 0px;
+		background-image: url("example/images/downarrow.jpg");
+	}
+	.sb-thumb {
+		position: absolute;
+		z-index: 999;
+		width: 100%;
+		background-color: #0000FF;
+		/*border: 1px solid #000000;*/
+	}
+	.sb-thumb.clicked {
+		background-color: #000099;
+	}
+	.sb-toptrack, .sb-bottomtrack {
+		position: absolute;
+		width: 100%;
+		background-color: #00FF00;
+	}
+	.sb-toptrack {
+		
+	}
+	.sb-bottomtrack {
+		
+	}
+	.sb-toptrack.clicked, .sb-bottomtrack.clicked {
+		background-color: #FFFF66;
+	}
