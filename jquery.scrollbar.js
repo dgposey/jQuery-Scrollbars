@@ -1,4 +1,26 @@
+/*
+ * A jQuery plugin for adding custom scrollbars to a div
+ * 
+ * Scrollbars, a jQuery plugin for adding custom scrollbars to a div.
+ * Version: 0.1
+ * Plugin URI: https://github.com/dgposey/jQuery-Scrollbars
+ * Author: David Posey
+ * Author URI: http://www.davidgposey.com
+ * License: GPL
+ * 
+ * Full documentation is available in README.md.
+ */
 (function($){
+	/**
+	 * Apply the scrollbar() method to the div or divs you want to have scrollbars.
+	 * Example Usage: $("#mydiv").scrollbar();
+	 * @param userOptions	optional JSON object with settings, including any of the following:
+	 * 		regInterval			(default: 50) the interval, in pixels, between scrolls when pressing an arrow key or clicking on the up/down buttons
+	 * 		trackInterval		(default: 200) the interval, in pixels, between scrolls when clicking on the track
+	 * 		initialScrollDelay	(default: 700) the delay, in milliseconds, between the first scroll and the second scroll when the mouse is down
+	 * 		scrollDelay			(default: 100) the delay, in milliseconds, between all subsequent scrolls when the mouse is down on up/down buttons
+	 * 		trackScrollDelay	(default: 100) the delay, in milliseconds, between all subsequent scrolls when the mouse is down on the track
+	 */
 	$.fn.scrollbar = function(userOptions){
 		var settings = {
 			regInterval: 50,				// the interval, in pixels, between scrolls when pressing an arrow key or clicking on the up/down buttons
@@ -6,11 +28,12 @@
 			initialScrollDelay: 700,		// the delay, in milliseconds, between the first scroll and the second scroll when the mouse is down
 			scrollDelay: 100,				// the delay, in milliseconds, between all subsequent scrolls when the mouse is down on up/down buttons
 			trackScrollDelay: 100			// the delay, in milliseconds, between all subsequent scrolls when the mouse is down on the track
-		}
+		};
 		if(userOptions){
 			$.extend(settings,userOptions);
 		}
 		
+		// iterate through each container
 		this.each(function(){
 			var cont = $(this);
 			
@@ -25,8 +48,6 @@
 			// do some initial calculations
 			var innerHeight, contHeight, trackHeight, heightRatio, thumbHeight, thumbDragInterval;
 			function init(){
-				//alert("init");
-				console.log(sbInner.height());
 				if(sbInner.height() > cont.height()){
 					innerHeight = sbInner.height();
 					contHeight = cont.height();
@@ -187,54 +208,37 @@
 			}
 			
 			
-			/*var left, right, top, bottom;
-			$(document).mousemove(function(e){
-				if(current != null){
-					left = current.offset().left;
-					right = left + current.width();
-					top = current.offset().top;
-					bottom = top + current.width();
-					console.log(left);
-					if(sbclicked){
-						if(e.pageX < left || e.pageX > right || e.pageY < top || e.pageY > bottom){
-							console.log("out of bounds!");
-							clearTimeout(scrollEvent);
-							trackMovement = false;
-							sbclicked = false;
-						}
-					}else{
-						if(e.pageX > left && e.pageX < right && e.pageY > top && e.pageY < bottom){
-							console.log("resume scrolling");
-							sbclicked = true;
-							current.trigger("mousedown");
-						}
-					}
-				}
-			});*/
-			
 			/**************************************
 			*** functions for going up and down ***
 			**************************************/
 			
-			// Go down and repeat (recursive)
+			/**
+			 * Go down and repeat (recursive)
+			 */
 			function goDown(){
 				goDirection(-1, settings.regInterval);
 				scrollEvent = setTimeout(goDown, settings.scrollDelay);
 			}
 			
-			// Go up and repeat (recursive)
+			/**
+			 * Go up and repeat (recursive)
+			 */
 			function goUp(){
 				goDirection(1, settings.regInterval);
 				scrollEvent = setTimeout(goUp, settings.scrollDelay);
 			}
 			
-			// Go down and repeat (recursive) (big interval)
+			/**
+			 * Go down and repeat (recursive) (big interval)
+			 */
 			function goDownBig(){
 				goDirection(-1, settings.trackInterval);
 				scrollEvent = setTimeout(goDownBig, settings.trackScrollDelay);
 			}
 			
-			// Go up and repeat (recursive) (big interval)
+			/**
+			 * Go up and repeat (recursive) (big interval)
+			 */
 			function goUpBig(){
 				goDirection(1, settings.trackInterval);
 				scrollEvent = setTimeout(goUpBig, settings.trackScrollDelay);
@@ -250,7 +254,9 @@
 				scrollEvent = setTimeout(goPageUp, settings.scrollDelay);
 			}
 			
-			// Go up (dir=1) or down (dir=-1) one time
+			/**
+			 * Go up (dir=1) or down (dir=-1) one time
+			 */
 			function goDirection(dir, interval){
 				var vertPos = sbInner.position().top;
 				var bottomPos = contHeight - innerHeight;
@@ -274,6 +280,9 @@
 				adjustTracks();
 			}
 			
+			/**
+			 * Adjust track and thumb heights and positions based on current conditions.
+			 */
 			function adjustTracks(){
 				var vertPos = sbInner.position().top;
 				var posRatio = (vertPos * -1) / (innerHeight - contHeight);
@@ -286,12 +295,15 @@
 				cont.find(".sb-thumb").css({"height": thumbHeight + "px", "top": cont.find(".sb-up").height() + topTrackHeight + "px"});
 			}
 			
+			/**
+			 * Function called on div after content of that div is changed to adjust the scrollbars.
+			 */
 			$.fn.adjust = function(){
 				init();
-			}
+			};
 			
 		});
 		
 		return this;
-	}
-})(jQuery)
+	};
+})(jQuery);
